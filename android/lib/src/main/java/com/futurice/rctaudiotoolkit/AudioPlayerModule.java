@@ -61,22 +61,22 @@ public class AudioPlayerModule extends ReactContextBaseJavaModule implements Med
 
     @Override
     public void onHostPause() {
-        for (Map.Entry<Integer, MediaPlayer> entry : this.playerPool.entrySet()) {
-            Integer playerId = entry.getKey();
-
-            if (!this.playerContinueInBackground.get(playerId)) {
-                MediaPlayer player = entry.getValue();
-                player.pause();
-
-                WritableMap info = getInfo(player);
-
-                WritableMap data = new WritableNativeMap();
-                data.putString("message", "Playback paused due to onHostPause");
-                data.putMap("info", info);
-
-                emitEvent(playerId, "pause", data);
-            }
-        }
+        // for (Map.Entry<Integer, MediaPlayer> entry : this.playerPool.entrySet()) {
+        //     Integer playerId = entry.getKey();
+        //
+        //     if (!this.playerContinueInBackground.get(playerId)) {
+        //         MediaPlayer player = entry.getValue();
+        //         player.pause();
+        //
+        //         WritableMap info = getInfo(player);
+        //
+        //         WritableMap data = new WritableNativeMap();
+        //         data.putString("message", "Playback paused due to onHostPause");
+        //         data.putMap("info", info);
+        //
+        //         emitEvent(playerId, "pause", data);
+        //     }
+        // }
     }
 
     @Override
@@ -149,7 +149,7 @@ public class AudioPlayerModule extends ReactContextBaseJavaModule implements Med
         if (file.exists()) {
             return Uri.fromFile(file);
         }
-        
+
         // Try finding file in Android "raw" resources
         if (path.lastIndexOf('.') != -1) {
             fileNameWithoutExt = path.substring(0, path.lastIndexOf('.'));
